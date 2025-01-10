@@ -6,3 +6,5 @@ The following was created with the following additional arguments: --x_limits 12
 <p align="center">
   <img src="./IEX_data.png" alt="alt text" width="600px" align="middle"/>
 </p>
+
+The limits for the second Y-axis in the plot (RU) are enbeded in the script and would need manual adjustment in case those need to be changed, but usually the gradient and conductivity don't exceed a limit of 100.
