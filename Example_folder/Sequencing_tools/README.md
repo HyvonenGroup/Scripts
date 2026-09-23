@@ -1,14 +1,14 @@
 # identify_construct
 
-A command-line tool that matches Sanger sequencing reads (`.ab1` chromatograms) against a panel of candidate plasmid constructs to determine which construct/variant was actually cloned — useful when you've designed several related plasmids (different inserts, tags, or point mutations) and need to figure out, from the sequencing data that comes back, which one you actually got.
+A command-line tool that matches Sanger sequencing reads (`.ab1` chromatograms) against a panel of candidate plasmid constructs to determine which construct/variant was actually cloned. Useful when one has designed several related plasmids (different inserts, tags, or point mutations) and need to figure out, from the sequencing data that comes back, which one you actually got.
 
 Built on [Biopython](https://biopython.org/) — no external aligners (BLAST, EMBOSS) required.
 
 ## Features
 
-- **Reads GenBank (`.gb`/`.gbk`), SnapGene (`.dna`), and FASTA** construct files directly — SnapGene maps are parsed natively via Biopython, no conversion needed.
+- **Reads GenBank (`.gb`/`.gbk`), SnapGene (`.dna`), and FASTA** construct files directly; SnapGene maps are parsed natively via Biopython, no conversion needed.
 - **Reads `.ab1` chromatograms** with automatic quality trimming (Mott's algorithm), or plain FASTA/`.seq` reads.
-- **Local pairwise alignment** against each full-length candidate, tried in both orientations — works even when a read only covers part of the plasmid, and reports which strand/orientation matched.
+- **Local pairwise alignment** against each full-length candidate, tried in both orientations; works even when a read only covers part of the plasmid, and reports which strand/orientation matched.
 - **Circular-plasmid aware** (`--circular`): wraps the sequence so a read spanning the origin of the reference file still aligns correctly.
 - **Confidence-aware calling**: flags a read `match`, `ambiguous`, or `no_match` rather than always forcing a best guess — `ambiguous` specifically catches reads that don't cover the region that actually distinguishes two candidates (e.g. wrong/too-distant primer) instead of silently mis-assigning them.
 - **Feature highlighting in the alignment report**: annotates the printed alignment with restriction sites (any enzyme known to `Bio.Restriction`, e.g. BamHI/XhoI) and exact sequence motifs you specify (e.g. a TEV protease site or a His-tag), so you can see at a glance whether a key feature is present and how much of it the read actually covers.
@@ -89,9 +89,9 @@ For every read, both orientations (as-sequenced and reverse-complement) are loca
 
 Two independent ways to highlight regions of interest in `--report` output:
 
-- **`--motifs "NAME=SEQUENCE,..."`** (default: `TEV=GAAAACCTGTACTTCCAGGGA,8xHis=CATCACCATCACCATCACCATCAC`) — exact literal DNA sequence search, both strands. Use this for short, well-defined motifs (protease sites, tags, primer-binding sites) where you know the precise sequence. Recommended default, since annotated feature boundaries in SnapGene/GenBank files are sometimes inflated or inconsistent (e.g. a "TEV site" feature that was auto-extended to cover an entire insert rather than just the ~21 bp cleavage recognition sequence).
-- **`--highlight-features "keyword,..."`** (off by default) — case-insensitive keyword match against GenBank/SnapGene feature labels/notes/genes (e.g. `"Strep,GB1"`). Use this when the annotated span is trustworthy and you don't want to type out the sequence.
-- **`--restriction-enzymes "NAME,..."`** (default: `BamHI,XhoI`) — locates recognition sites for any enzyme known to `Bio.Restriction`.
+- **`--motifs "NAME=SEQUENCE,..."`** (default: `TEV=GAAAACCTGTACTTCCAGGGA,8xHis=CATCACCATCACCATCACCATCAC`) exact literal DNA sequence search, both strands. To use for short, well-defined motifs (protease sites, tags, primer-binding sites) where one knows the precise sequence. Recommended default, since annotated feature boundaries in SnapGene/GenBank files are sometimes inflated or inconsistent.
+- **`--highlight-features "keyword,..."`** (off by default) case-insensitive keyword match against GenBank/SnapGene feature labels/notes/genes (e.g. `"Strep,GB1"`). Use this when the annotated span is trustworthy and one doesn't want to type out the sequence.
+- **`--restriction-enzymes "NAME,..."`** (default: `BamHI,XhoI`) locates recognition sites for any enzyme known to `Bio.Restriction`.
 
 ## CLI reference
 
