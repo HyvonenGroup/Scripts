@@ -1,0 +1,15 @@
+biopython>=1.81
+rdkit>=2023.3.1
+matplotlib>=3.7
+numpy>=1.24
+scipy>=1.10
+certifi
+
+# Optional, only needed for --protonation (real per-residue/per-ligand pKa
+# at a given pH instead of the standard textbook Asp/Glu/Lys/Arg assumption):
+#   pip install propka dimorphite-dl
+#
+# Optional, only needed for protein_ligand_interactions.py --render
+# (renders the 3D PyMOL interaction script to a PNG/PSE):
+#   pymol must be installed separately and available on PATH
+#   (e.g. `conda install -c conda-forge pymol-open-source`)
