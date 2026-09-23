@@ -1,6 +1,6 @@
 # identify_construct
 
-A command-line tool that matches Sanger sequencing reads (`.ab1` chromatograms) against a panel of candidate plasmid constructs to determine which construct/variant was actually cloned. Useful when one has designed several related plasmids (different inserts, tags, or point mutations) and need to figure out, from the sequencing data that comes back, which one you actually got.
+A command-line Sequencing tool that matches Sanger sequencing reads (`.ab1` chromatograms) against a panel of candidate plasmid constructs to determine which construct/variant was cloned. Useful when one has designed several related plasmids (different inserts, tags, or point mutations) and need to figure out, from the sequencing data that comes back, which one you actually got. 
 
 Built on [Biopython](https://biopython.org/) — no external aligners (BLAST, EMBOSS) required.
 
